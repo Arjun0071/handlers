@@ -1,0 +1,22 @@
+- hosts: web
+  tasks:
+  - name: Installing httpd
+    package:
+       name: httpd
+       state: present
+
+  - name: Copying Webpage Content to host file
+    copy:
+       dest: /var/www/html/webpage.html
+       content: "Hey There,Welcome to my WebPage. How may i help you? "
+
+  - name: Starting Service
+    service:
+       name: httpd
+       state: started
+  
+  handlers:
+  - name: " Starting service "
+    service:
+       name: httpd
+       state: restarted
